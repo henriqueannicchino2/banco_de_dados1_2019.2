@@ -1,0 +1,182 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+body{
+	font-family: arial;
+	background: url("../image/BackgroundMain.jpg");
+}
+
+ul{
+	list-style: none;
+}
+
+img{
+	width: 40px;
+}
+
+input[type="checkbox"]{
+	display: none;
+}
+
+nav{
+	background-color: rgba(16,16,16,.5);
+	width: 350px;
+	height: 100%;
+	left: -350px;
+	position: absolute;
+	transition: all .5s;
+}
+
+input[type="checkbox"]:checked ~ nav{
+	transform: translatex(350px);
+}
+
+ul{
+	position: absolute;
+	top: 70px;
+	width: 100%;
+}
+
+.btn_menu{
+	width: 100%;
+	height: 20px;
+	font-size: 21px;
+	background-color: transparent;
+	cursor: pointer;
+	border: none;
+	display: block;
+	padding-top: 20px;
+	padding-bottom: 40px;
+	color: white;
+}
+
+.btn_menu:hover{
+	background-color: rgba(12,69,36);
+	color: black;
+}
+
+a{
+	display: block;
+	padding: 20px 5px;
+	color: white;
+}
+
+a:hover{
+	background-color: rgba(12,69,36);
+	color: black;
+}
+
+label{
+	position: absolute;
+	padding: 15px;
+	z-index: 3;
+}
+
+.opt_screen{
+		width: 99.6%;
+		height: 99.4%;
+		display:none;
+		border-style:solid;
+		border-color: transparent;
+}
+
+.container{
+	width: 500px;
+	height: 400px;
+	background-color: rgba(255,255,255, 0.5);
+	margin: auto;
+	margin-top: 180px;
+	border-radius: 20px;
+	padding-top: 20px;
+	z-index: 1;
+}
+
+.container label{
+	font-size: 38px;
+	margin-left: 100px;
+	font-family: Forte;
+	color: #000000;
+}
+
+.container .btn_menu{
+	color: black;	
+}
+
+
+table{
+        border-collapse: collapse;
+		margin-top: 60px;
+        width: 100%;
+        color: #118044;
+        font-family: monospace;
+        text-align: left;
+}
+
+th{
+        background-color: #2B093F;
+        color: white;
+}
+
+.inputt input{
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 24px;
+	border-radius: 7px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-left: 85px;
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+
+
+.selectBox{
+	margin: 10px auto;
+	margin-left: 87px;
+}
+
+.selectBox select{
+	width: 325px;
+	height: 30px;
+}
+
+.btn_menuD{
+	width: 330px;
+	height: 40px;
+	font-size: 21px;
+	background-color: transparent;
+	cursor: pointer;
+	border: none;
+	display: block;
+	padding-top: 20px;
+	padding-bottom: 40px;
+	color: black;
+}
+
+.btn_menuD:hover{
+	background-color: #fc0303;
+}
+
+.btn_menuN{
+	width: 330px;
+	height: 40px;
+	font-size: 21px;
+	background-color: transparent;
+	cursor: pointer;
+	border: none;
+	display: block;
+	padding-top: 20px;
+	padding-bottom: 40px;
+	color: black;
+}
+
+.btn_menuN:hover{
+	background-color: rgba(12,69,36);
+}
