@@ -1,0 +1,297 @@
+/*DROP TABLE pessoa, admin, admissao, agendamento, cama, 
+clinica, departamento, enfermeiro, medico, paciente, prescricao, quarto,
+recepcionista, setor, tipoquarto, tratamento, visita*/
+/*CREATE TABLE pessoa(
+	pessoaId SERIAL PRIMARY KEY,
+	primeiroNome VARCHAR,
+	ultimoNome VARCHAR,
+	endereco VARCHAR,
+	cidade varchar,
+	estado VARCHAR,
+	cep VARCHAR,
+	data_nasc date,
+	cpf VARCHAR,
+	telefone VARCHAR
+);*/
+
+/*CREATE TABLE admin(
+	adminId SERIAL PRIMARY KEY,
+	usuario VARCHAR,
+	senha VARCHAR,
+	pessoaId INT REFERENCES pessoa(pessoaId) UNIQUE,
+	logado INT DEFAULT 0
+);*/
+
+/*CREATE TABLE funcionario(
+	funcId SERIAL PRIMARY KEY,
+	dataContratacao DATE,
+	anosDeExperiencia INT,
+	pessoaId INT REFERENCES pessoa(pessoaId) UNIQUE
+);*/
+
+/*CREATE TABLE medico(
+	medicoId SERIAL PRIMARY KEY,
+	descAbilidade VARCHAR,
+	usuario VARCHAR,
+	senha VARCHAR,
+	funcId INT REFERENCES funcionario(funcId) UNIQUE,
+	setorId INT REFERENCES setor(setorId),
+	departamentoId INT REFERENCES departamento(departamentoId),
+	logado INT DEFAULT 0
+);*/
+
+/*CREATE TABLE enfermeiro(
+	enfermeiroId SERIAL PRIMARY KEY,
+	descAbilidade VARCHAR,
+	usuario VARCHAR,
+	senha VARCHAR,
+	funcId INT REFERENCES funcionario(funcId) UNIQUE,
+	setorId INT REFERENCES setor(setorId),
+	departamentoId INT REFERENCES departamento(departamentoId),
+	logado INT DEFAULT 0
+);*/
+
+/*CREATE TABLE recepcionista(
+	recepcionistaId SERIAL PRIMARY KEY,
+	descAbilidade VARCHAR,
+	usuario VARCHAR,
+	senha VARCHAR,
+	funcId INT REFERENCES funcionario(funcId) UNIQUE,
+	logado INT DEFAULT 0
+);*/
+
+/*CREATE TABLE clinica(
+	clinicaId SERIAL PRIMARY KEY,
+	clinicaNome VARCHAR
+);*/
+
+/*CREATE TABLE departamento(
+	departamentoId SERIAL PRIMARY KEY,
+	departamentoNome VARCHAR,
+	clinicaId INT REFERENCES clinica(clinicaId)
+);*/
+
+--Dps verificar se nao precisa mais nada
+/*CREATE TABLE paciente(
+	pacienteId SERIAL PRIMARY KEY,
+	dataReg DATE,
+	pessoaId INT REFERENCES pessoa(pessoaId)
+);*/
+
+
+/*CREATE TABLE tratamento(
+	tratamentoId SERIAL PRIMARY KEY,
+	tratamentoDesc VARCHAR,
+	tratamentoData DATE,
+	tratamentoValor FLOAT CHECK(tratamentoValor >= 0),
+	pacienteId INT REFERENCES paciente(pacienteId),
+	medicoId INT REFERENCES medico(medicoId)
+);*/
+
+/*CREATE TABLE medicamento(
+	medicamentoId SERIAL PRIMARY KEY,
+	medicamentoNome VARCHAR,
+	medicamentoDesc VARCHAR,
+	quantidade INT CHECK(quantidade_atual>=0),
+	preco FLOAT CHECK(preco >= 0)
+);*/
+/*CREATE TABLE prescricao(
+	prescricaoId SERIAL PRIMARY KEY,
+	prescricaoData DATE,
+	medicamentoId INT REFERENCES medicamento(medicamentoId),
+	tratamentoId INT REFERENCES tratamento(tratamentoId)
+);*/
+
+/*CREATE TABLE admissao(
+	admissaoId SERIAL PRIMARY KEY,
+	pacienteId INT REFERENCES paciente(pacienteId),
+	adm_data DATE,
+	disc_date VARCHAR
+);*/
+
+/*CREATE TABLE setor(
+	setorId SERIAL PRIMARY KEY,
+	clinicaId INT REFERENCES clinica(clinicaId),
+	setorNome VARCHAR
+);*/
+
+/*CREATE TABLE quarto(
+	quartoId SERIAL PRIMARY KEY,
+	quartoDesc VARCHAR,
+	capacidade INT,
+	quartoNum INT,
+	setorId INT REFERENCES setor(setorId),
+	disponivel INT DEFAULT 1
+);*/
+/*CREATE TABLE cama(
+	camaId SERIAL PRIMARY KEY,
+	quartoId INT REFERENCES quarto(quartoId),
+	pacienteId INT REFERENCES paciente(pacienteid),
+	camaNum INT
+);*/
+--INSERT INTO clinica(clinicaNome)VALUES('ViverCauan');
+--INSERT INTO departamento(departamentoNome,clinicaId)VALUES('CENTRO DE INCONTINÊNCIA E DOENÇAS DO ASSOALHO PÉLVICO',1);
+--INSERT INTO setor(clinicaId,setorNome)VALUES(1,'setor das dores');
+/*INSERT INTO pessoa(primeiroNome,ultimoNome,endereco,cidade,estado,cep,data_nasc,cpf,telefone) 
+VALUES ('Pedro','Alephu','rua: nao sei','Má Vista','Rorãima','69308031','1999-01-01','000.000.000-01','99153-1289');
+
+INSERT INTO pessoa(primeiroNome,ultimoNome,endereco,cidade,estado,cep,data_nasc,cpf,telefone) 
+VALUES ('Ibukun','Didier','rua: nao sei 69','Má Vista','Rorãima','69308031','1995-01-01','000.000.000-02','99153-1289');
+
+INSERT INTO pessoa(primeiroNome,ultimoNome,endereco,cidade,estado,cep,data_nasc,cpf,telefone) 
+VALUES
+('Gon', 'kaka', 'bueiro', 'nada', 'Rorãima', '69303608', '2000-01-01', '000.000.000-03','74635-5748');
+*/
+--SELECT * FROM pessoa;
+--INSERT INTO funcionario(dataContratacao,anosDeExperiencia,pessoaId)VALUES('2001-01-01','5','1');
+--SELECT * FROM funcionario;
+
+--INSERT INTO funcionario(dataContratacao,anosDeExperiencia,pessoaId)VALUES('2004-02-01','1','2');
+--INSERT INTO funcionario(dataContratacao,anosDeExperiencia,pessoaId)VALUES('2006-04-05','0','3');
+--INSERT INTO admin(usuario,senha,pessoaId)VALUES('adm','1234',1);	
+--INSERT INTO medico(descAbilidade,usuario,senha,funcId)VALUES('açougueiro','med','1234',2);
+/*INSERT INTO enfermeiro(descAbilidade,usuario,senha,funcId,setorId,departamentoId)VALUES('supositorio','enf','1234',
+---INSERT INTO paciente(DataReg, pessoaID) VALUES ('2015-06-05', 3)																					2,1,1);*/
+---INSERT INTO recepcionista(descAbilidade,usuario,senha,funcId)VALUES('dormir','recp','1234',2);
+---SELECT * FROM pessoa, funcionario INNER JOIN admin on pessoa.pessoaID = admin.pessoaID;
+---SELECT pessoaID, primeironome from pessoa
+/*
+CREATE TABLE movimenta_medicamento(
+	moviemtacaoID SERIAL PRIMARY KEY,
+	medicamentoID INT,
+	tipo VARCHAR(1),
+	quantidade_mov INT,
+	FOREIGN KEY (medicamentoID) REFERENCES medicamento(medicamentoID)
+);
+
+CREATE TABLE vendas(
+	medicamentoID INT PRIMARY KEY,
+	quantidade_vendas INT,
+	FOREIGN KEY (medicamentoID) REFERENCES medicamento(medicamentoID)
+);
+---DROP TABLE vendas
+INSERT INTO medicamento(medicamentoNome, medicamentoDesc, quantidade, preco) VALUES('M2','medicamento 2', 18, 15.00);
+SELECT * FROM medicamento;
+CREATE OR REPLACE FUNCTION update_movimentacao()
+RETURNS TRIGGER
+AS $up_mov$
+BEGIN
+	IF NEW.tipo = 'A' THEN -- adicionar medicamento
+		UPDATE medicamento as me
+		SET quantidade = (quantidade + NEW.quantidade_mov)
+		FROM movimenta_medicamento as mov
+		WHERE me.medicamentoID = mov.medicamentoID;
+	ELSEIF NEW.tipo = 'V' THEN --vender medicamento
+		UPDATE medicamento as me
+		SET quantidade = (quantidade - NEW.quantidade_mov)
+		FROM movimenta_medicamento as mov
+		WHERE me.medicamentoID = mov.medicamentoID;
+		UPDATE vendas
+		SET quantidade_vendas = quantidade_vendas + NEW.quantidade_mov
+		FROM movimenta_medicamento as mov
+		WHERE vendas.medicamentoID = mov.medicamentoID;
+	END IF;
+	RETURN NEW;
+END;
+$up_mov$ LANGUAGE plpgsql;
+CREATE TRIGGER up_medicamento AFTER INSERT ON movimenta_medicamento
+FOR EACH ROW EXECUTE PROCEDURE update_movimentacao();
+INSERT INTO vendas(medicamentoID, quantidade_vendas) VALUES (1, 0);
+INSERT INTO movimenta_medicamento(medicamentoID,tipo, quantidade) VALUES (1, 'A', 50);
+
+CREATE OR REPLACE FUNCTION edit_movimentacao()
+RETURNS TRIGGER
+AS $ed_mov$
+BEGIN
+	IF OLD.tipo = 'A' THEN
+		UPDATE medicamento as me
+		SET quantidade = quantidade - OLD.quantidade_mov + NEW.quantidade_mov
+		FROM movimenta_medicamento as mov
+		WHERE NEW.medicamentoID = OLD.medicamentoID;
+	ELSEIF NEW.tipo = 'V' THEN
+		UPDATE medicamento as me
+		SET quantidade = quantidade + OLD.quantidade_mov - NEW.quantidade_mov
+		FROM movimenta_medicamento as mov
+		WHERE NEW.medicamentoID = OLD.medicamentoID;
+		UPDATE vendas
+		SET quantidade_vendas = quantidade_vendas - NEW.quantidade_mov + NEW.quantidade_mov
+		FROM movimenta_medicamento as mov
+		WHERE NEW.medicamentoID = OLD.medicamentoID;
+	END IF;
+	RETURN NEW;
+END;
+$ed_mov$ LANGUAGE plpgsql;
+CREATE TRIGGER ed_medicamento AFTER UPDATE ON movimenta_medicamento
+FOR EACH ROW EXECUTE PROCEDURE edit_movimentacao();
+UPDATE movimenta_medicamento set quantidade = 20 where moviemtacaoID = 23;
+SELECT moviemtacaoID FROM movimenta_medicamento;
+SELECT me.medicamentoID, me.quantidade_atual, v.quantidade_vendas, me.preco FROM medicamento as me, vendas as v;
+*/
+/*
+---ttrrgier que fazinsert em evdas quando ha insert em medicamento 
+CREATE OR REPLACE FUNCTION update_vendas()
+RETURNS TRIGGER
+AS $up_venda$
+BEGIN
+	INSERT INTO vendas(medicamentoID, quantidade_vendas)
+	VALUES ((SELECT medicamentoID FROM medicamento WHERE medicamentoID = NEW.medicamentoID),0);
+	RETURN NEW;
+END;
+$up_venda$ LANGUAGE plpgsql;
+CREATE TRIGGER insere_venda AFTER INSERT ON medicamento
+FOR EACH ROW EXECUTE PROCEDURE update_vendas();
+SELECT * FROM vendas;
+---trigger que libra o quarto quando o paciente é liberado
+CREATE OR REPLACE FUNCTION libera_cama()
+RETURNS TRIGGER
+AS $up_cama$
+BEGIN
+	UPDATE cama
+	SET pacienteID = NULL
+	WHERE pacienteID = (SELECT pacienteID FROM paciente WHERE pacienteID = OLD.pacienteID);
+	RETURN OLD;
+END;
+$up_cama$ LANGUAGE plpgsql;
+CREATE TRIGGER libera_paciente BEFORE DELETE ON paciente
+FOR EACH ROW EXECUTE PROCEDURE libera_cama();
+SELECT * FROM paciente;
+SELECT * FROM setor;
+SELECT * FROM cama;
+INSERT INTO quarto(quartoDesc, capacidade, quartoNum, setorID)
+VALUES ('quarto 1', 2, 0, 1);
+INSERT INTO cama(quartoID, pacienteID, camaNum)
+VALUES ( 1, NULL, 0);
+UPDATE cama set pacienteID = 1 where camaID = 4;
+DELETE FROM paciente where pacienteID = 1;
+--DROP TABLE cama
+DROP VIEW view_funcionario;
+CREATE VIEW view_funcionario WITH (security_barrier) AS SELECT * FROM funcionario;
+
+EXPLAIN SELECT * FROM view_funcionario;
+CREATE VIEW ocupacao WITH (security_barrier) AS SELECT pessoa.pessoaId, pessoa.primeiroNome, pessoa.cpf, 'medico' as ocupacao, funcionario.anosDeExperiencia
+FROM pessoa INNER JOIN funcionario ON funcionario.pessoaId = pessoa.pessoaID
+ INNER JOIN medico ON medico.funcId = funcionario.funcId
+ UNION ALL
+ SELECT pessoa.pessoaId, pessoa.primeiroNome, pessoa.cpf, 'enfermeiro' as ocupacao, funcionario.anosDeExperiencia
+ FROM pessoa INNER JOIN funcionario ON funcionario.pessoaId = pessoa.pessoaID
+ INNER JOIN enfermeiro ON enfermeiro.funcId = funcionario.funcId
+ UNION ALL
+ SELECT pessoa.pessoaId, pessoa.primeiroNome, pessoa.cpf, 'repcionista' as ocupacao, funcionario.anosDeExperiencia
+ FROM pessoa INNER JOIN funcionario ON funcionario.pessoaId = pessoa.pessoaID
+ INNER JOIN recepcionista ON recepcionista.funcId = funcionario.funcId
+ UNION ALL
+ SELECT pessoa.pessoaId, pessoa.primeiroNome, pessoa.cpf, 'admin' as ocupacao, funcionario.anosDeExperiencia
+ FROM pessoa INNER JOIN funcionario ON funcionario.pessoaId = pessoa.pessoaID
+ INNER JOIN admin ON admin.pessoaId = pessoa.pessoaId
+ UNION ALL
+ SELECT pessoa.pessoaId, pessoa.primeiroNome, pessoa.cpf, 'paciente' as ocupacao, funcionario.anosDeExperiencia
+ FROM pessoa INNER JOIN funcionario ON funcionario.pessoaId = pessoa.pessoaID
+ INNER JOIN paciente ON paciente.pessoaId = pessoa.pessoaId
+ 
+ 
+CREATE VIEW cama_status AS SELECT camaId, 'ocupada' as status from cama
+WHERE pacienteId != NULL
+UNION ALL
+SELECT camaId, 'livre' as status from cama
+WHERE cama.pacienteId = NULL
+*/
